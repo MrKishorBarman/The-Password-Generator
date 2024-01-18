@@ -6,9 +6,10 @@ function App() {
   const [numberAllowed, setNumberAllowed] = useState(false)
   const [charAllowed, setCharAllowed] = useState(false)
   const [password, setPassword] = useState("")
+  const [color, setColor] = useState("rgb(59 130 246)")
 
   const passwordGenerator = useCallback(() => {
-  
+
     let pass = ""
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
@@ -27,6 +28,20 @@ function App() {
   const copyPasswordToClipboard = () => {
     window.navigator.clipboard.writeText(password)
     passwordRef.current?.select()
+
+  }
+
+  const copyBg = () => {
+    setColor("#0f0147");
+
+    setTimeout(() => {
+      setColor(color)
+  }, 150)
+}
+
+  const handleButton = () => {
+    copyPasswordToClipboard();
+    copyBg()
   }
 
   useEffect(() => {
@@ -58,75 +73,75 @@ function App() {
           placeholder="Password"
           readOnly
           ref={passwordRef} />
-
         <button
-          onClick={copyPasswordToClipboard}
-          className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>
-          Copy
+          onClick={handleButton}
+          className='outline-none bg-blue-500 text-white px-3 py-0.5 shrink-0'
+          style={{ backgroundColor: color }}>
+            Copy
         </button>
 
       </div>
 
 
       {/* <div className='flex text-sm gap-x-2'> */}
-        <div className='flex items-center gap-x-1'>
+      <div className='flex items-center gap-x-1'>
 
-          <div
-            className='flex items-center gap-x-1'>
+        <div
+          className='flex items-center gap-x-1'>
 
-            <input
-              type="range"
-              min={3}
-              max={50}
-              value={length}
-              className='cursor-pointer'
-              onChange={(e) => setLength(e.target.value)}
-              />
+          <input
+            type="range"
+            min={3}
+            max={50}
+            value={length}
+            className='cursor-pointer'
+            onChange={(e) => setLength(e.target.value)}
+          />
 
-            <label >
-              Length: {length}
-            </label>
+          <label >
+            Length: {length}
+          </label>
 
-          </div>
+        </div>
 
-          <div
-            className='flex items-center gap-x-1'>
+        <div
+          className='flex items-center gap-x-1'>
 
-            <input
-              type="checkbox"
-              defaultChecked={numberAllowed}
-              onChange={() => setNumberAllowed(prev => !prev)}
-             />
+          <input
+            type="checkbox"
+            defaultChecked={numberAllowed}
+            onChange={() => setNumberAllowed(prev => !prev)}
+          />
 
-            <label>
-              Number
-            </label>
+          <label>
+            Number
+          </label>
 
-          </div>
+        </div>
 
-          <div
-            className='flex items-center gap-x-1'>
+        <div
+          className='flex items-center gap-x-1'>
 
-            <input
-              type="checkbox"
-              defaultChecked={charAllowed}
-              onChange={() => {
-                setCharAllowed((prev) => !prev)
-              }}
-            />
+          <input
+            type="checkbox"
+            defaultChecked={charAllowed}
+            onChange={() => {
+              setCharAllowed((prev) => !prev)
+            }}
+          />
 
-            <label>
-              Character
-            </label>
-
-          </div>
+          <label>
+            Character
+          </label>
 
         </div>
 
       </div>
 
+    </div>
 
-      )
+
+  )
 }
 
-      export default App
+export default App
