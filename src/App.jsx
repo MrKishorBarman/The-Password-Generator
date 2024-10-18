@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash, faRotateRight, fas } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faEyeSlash, faRotateRight } from '@fortawesome/free-solid-svg-icons'
 
 import Snackbar from '@mui/material/Snackbar';
 import { Slide } from '@mui/material'
@@ -26,7 +26,7 @@ function App() {
     if (charAllowed) str += "~!@#$%^&*`"
 
     for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random() * str.length + 1)
+      let char = Math.floor(Math.random() * str.length)
       pass += str.charAt(char)
     }
 
@@ -37,7 +37,7 @@ function App() {
   const rotateRef = useRef(null)
 
   const copyPasswordToClipboard = () => {
-    window.navigator.clipboard.writeText(password)      //specifically copies text to the clipboard in a web-browser environment.
+    window.navigator.clipboard.writeText(password)
     passwordRef.current?.select()
   }
 
@@ -151,7 +151,7 @@ function App() {
             max={25}
             value={length}
             className='cursor-pointer'
-            onChange={(e) => setLength(e.target.value)}
+            onChange={(e) => setLength(Number(e.target.value))}
           />
 
           <label >
@@ -165,7 +165,7 @@ function App() {
 
           <input
             type="checkbox"
-            defaultChecked={numberAllowed}
+            checked={numberAllowed}
             onChange={() => setNumberAllowed(prev => !prev)}
           />
 
@@ -180,7 +180,7 @@ function App() {
 
           <input
             type="checkbox"
-            defaultChecked={charAllowed}
+            checked={charAllowed}
             onChange={() => {
               setCharAllowed((prev) => !prev)
             }}
