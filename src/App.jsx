@@ -42,7 +42,7 @@ function App() {
   }
 
   useEffect(() => {
-    document.title = "The Password Generator"
+    document.title = "PassKit"
     passwordGenerator()
   }, [length, numberAllowed, charAllowed])
 
@@ -54,7 +54,7 @@ function App() {
       <h1
         id='font-size'
         className="text-orange-500 text-center mb-3 font-extrabold text-xl">
-        The Password Generator
+        PassKit
       </h1>
 
       <div
